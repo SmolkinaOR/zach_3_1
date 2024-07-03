@@ -1,3 +1,13 @@
+"""
+содержание ответа json по корзинам:
+идент корзины - можно взять название в продуктах, но лень.
+идентификатор пользователя
+дата создания карзины
+продукты:
+    идентификатор продукта - название можно взять название в продуктах, но лень.
+    колличество в заказе
+"""
+
 # Импортируем необходимые модули
 
 import requests
@@ -8,27 +18,26 @@ response = requests.get(url)
 # Извлекаем данные JSON из ответа
 p_carts = response.json()
 # Флаг, указывающий, найдена ли категория
-find = False
+
 # Итерируемся по карзинкам
 for p_carts1 in p_carts:
-
     print(f'корзина : {p_carts1} ')
-"""cat_v = input('Введите категорию товара, о которой хотите узнать: ')
-for user in users:
-    # Проверяем, совпадает категория с введенной
-    if user == cat_v:
-        # Если да, ставим флаг
-        find = True
-if find == True:
-    # Устанавливаем URL API-запроса
-    url1 = "https://fakestoreapi.com/products/category/"+cat_v
-    response = requests.get(url1)
-    # Извлекаем данные JSON из ответа
-    prod1 = response.json()
-    for prod2 in prod1:
-        print(f'идентификатор: {prod2["id"]} титул: {prod2["title"]}')
-        print(f'категория: {prod2["category"]} адрес картинки: {prod2["image"]}')
-        print(f'описание: {prod2["description"]} ')
-else:
-    print(f'Нет такой категории')
-"""
+print('------------')
+url2 = "https://fakestoreapi.com/users"
+response = requests.get(url2)
+# Извлекаем данные JSON из ответа
+p_users = response.json()
+for p_user in p_users:
+    find = False
+    print(f'идентификатор пользователя: {p_user["id"]}')
+    print(f'Имя: {p_user["name"]["firstname"]} Фамилия: {p_user["name"]["lastname"]}')
+    for p_carts2 in p_carts:
+        if p_user["id"] == p_carts2["userId"]:
+            find = True
+            print(f'корзина : {p_carts2} ')
+    if find == False:
+        print('корзина пуста')
+    print('------------')
+
+
+
