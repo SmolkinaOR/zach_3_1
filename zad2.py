@@ -9,9 +9,10 @@ response = requests.get(url)
 p_carts = response.json()
 # Флаг, указывающий, найдена ли категория
 find = False
-# Итерируемся по списку пользователей
+# Итерируемся по карзинкам
 for p_carts1 in p_carts:
-    print(f'Категория : {p_carts1} ')
+
+    print(f'корзина : {p_carts1} ')
 """cat_v = input('Введите категорию товара, о которой хотите узнать: ')
 for user in users:
     # Проверяем, совпадает категория с введенной
